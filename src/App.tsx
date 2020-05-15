@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import RedditApiProvider, { useRedditApi } from './components/RedditApiProvider';
+import { getSimilarSubreddits } from './utils/similarSubreddits';
 
 function App() {
+  const { redditApi, login } = useRedditApi();
+
+  useEffect(() => {
+    if (!redditApi) {
+      return;
+    }
+
+    redditApi.fetchSubscribedSubreddits().then((subreddits) => {
+      const subredditNames = subreddits.map(subreddit => subreddit.data.display_name.toLowerCase());
+      console.log(subredditNames);
+
+      getSimilarSubreddits(subredditNames).then((similarSubreddits) => {
+        console.log('Similar subs', similarSubreddits);
+      });
+    });
+  }, [redditApi]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {redditApi ? (
+        <div>Logged in!</div>
+      ) : (
+        <div>
+          <button onClick={login}>Log in</button>
+        </div>
+      )}
     </div>
   );
 }
 
-export default App;
+export default () => (
+  <RedditApiProvider>
+    <App />
+  </RedditApiProvider>
+);

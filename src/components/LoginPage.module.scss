@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+
+  > * {
+    flex: 1 1 auto;
+  }
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

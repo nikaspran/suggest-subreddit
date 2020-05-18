@@ -12,7 +12,7 @@ interface SimilarityResult {
     score: Score;
     contributors: { [contributor: string]: Score };
   };
-};
+}
 
 export interface WorkerOutput {
   invocationKey: string;
@@ -36,7 +36,6 @@ export default () => {
         request.open('GET', `${self.location.origin}/similarSubreddits.json`);
         request.send();
       } catch (error) {
-        console.log(error);
         reject(error);
       }
     });
@@ -46,14 +45,14 @@ export default () => {
     sourceSubreddits,
     count = 10,
   }: {
-    sourceSubreddits: string[],
-    count: number
+    sourceSubreddits: string[];
+    count: number;
   }): Promise<SimilarityResult> {
     waitForSimilarities = waitForSimilarities || fetchSimilarities();
 
     const similarTo = await waitForSimilarities;
 
-    const alreadyInSource = new Set(sourceSubreddits.map(sr => sr.toLowerCase()));
+    const alreadyInSource = new Set(sourceSubreddits.map((subreddit) => subreddit.toLowerCase()));
 
     const result: SimilarityResult = {};
     sourceSubreddits.forEach((subreddit) => {
@@ -84,6 +83,6 @@ export default () => {
     postMessage({
       invocationKey: event.data.invocationKey,
       result: await getSimilarSubreddits(data),
-    } as WorkerOutput, undefined as any);
+    } as WorkerOutput, undefined as never);
   });
 };

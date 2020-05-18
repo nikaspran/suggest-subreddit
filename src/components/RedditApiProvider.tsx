@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState, useContext } from 'react'
+import React, { ReactNode, useEffect, useState, useContext } from 'react';
 import RedditApi, { RedditAuthToken, fetchAccessToken, redirectToAuth } from '../utils/RedditApi';
 
 const TOKEN_KEY = 'redditApiToken';
@@ -51,9 +51,9 @@ export default function RedditApiProvider({
     const [, code] = window.location.search.match(/code=([^&]+)/) || [];
     if (code) {
       window.history.replaceState(null, '', '/');
-      fetchAccessToken(code).then((token) => {
-        storeToken(token);
-        setRedditApi(new RedditApi(token));
+      fetchAccessToken(code).then((newToken) => {
+        storeToken(newToken);
+        setRedditApi(new RedditApi(newToken));
       });
     }
   }, []);

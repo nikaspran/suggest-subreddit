@@ -1,0 +1,21 @@
+@import '../variables.scss';
+
+$animationTiming: ease-in-out .08s;
+
+.callToAction {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  border: 2px solid $colorAccent;
+  border-radius: $borderRadius;
+  background: $colorAccent;
+  color: $colorForeground;
+  text-decoration: none;
+  transition: all $animationTiming;
+  font-size: inherit;
+
+  &:hover {
+    color: $colorAccent;
+    background: $colorForeground;
+  }
+}

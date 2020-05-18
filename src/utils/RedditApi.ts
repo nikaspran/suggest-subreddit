@@ -16,10 +16,10 @@ function withQuery(url: string, params: object) {
 
 export function redirectToAuth() {
   window.location.href = withQuery('https://www.reddit.com/api/v1/authorize', {
-    client_id: config.REDDIT_CLIENT_ID,
-    response_type: 'code',
+    client_id: config.REDDIT_CLIENT_ID, // eslint-disable-line @typescript-eslint/camelcase
+    response_type: 'code', // eslint-disable-line @typescript-eslint/camelcase
     state: randomString(),
-    redirect_uri: config.REDDIT_REDIRECT_URI,
+    redirect_uri: config.REDDIT_REDIRECT_URI, // eslint-disable-line @typescript-eslint/camelcase
     duration: 'temporary',
     scope: 'mysubreddits',
   });
@@ -38,12 +38,12 @@ export async function fetchAccessToken(code: string) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic ${btoa(`${config.REDDIT_CLIENT_ID}:`)}`
+      Authorization: `Basic ${btoa(`${config.REDDIT_CLIENT_ID}:`)}`,
     },
     body: toQueryString({
-      grant_type: 'authorization_code',
+      grant_type: 'authorization_code', // eslint-disable-line @typescript-eslint/camelcase
       code,
-      redirect_uri: config.REDDIT_REDIRECT_URI,
+      redirect_uri: config.REDDIT_REDIRECT_URI, // eslint-disable-line @typescript-eslint/camelcase
     }),
   });
 
@@ -58,7 +58,7 @@ export async function fetchAccessToken(code: string) {
 
   return {
     ...json,
-    expires_at: Date.now() + json.expires_in * 1000,
+    expires_at: Date.now() + json.expires_in * 1000, // eslint-disable-line @typescript-eslint/camelcase
   } as RedditAuthToken;
 }
 
@@ -66,7 +66,7 @@ interface Subreddit {
   kind: string;
   data: {
     display_name: string;
-  }
+  };
 }
 
 interface Listing {
@@ -74,7 +74,7 @@ interface Listing {
   data: {
     after: string;
     children: Subreddit[];
-  }
+  };
 }
 
 export default class RedditApi {
@@ -84,11 +84,11 @@ export default class RedditApi {
   private async iterateAndCollectListing(url: string, after?: string): Promise<Subreddit[]> {
     const response = await fetch(withQuery(url, {
       limit: 100,
-      ...after ? { after } : {}
+      ...after ? { after } : {},
     }), {
       headers: {
         Authorization: `bearer ${this.token.access_token}`,
-      }
+      },
     });
 
     if (!response.ok) {
@@ -100,7 +100,7 @@ export default class RedditApi {
     return [
       ...json.data.children,
       ...json.data.after ? await this.iterateAndCollectListing(url, json.data.after) : [],
-    ]
+    ];
   }
 
   async fetchSubscribedSubreddits() {

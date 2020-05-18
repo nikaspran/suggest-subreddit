@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import styles from './App.module.scss';
 import RedditApiProvider, { useRedditApi } from './components/RedditApiProvider';
 import { getSimilarSubreddits } from './utils/similarSubreddits';
+import LoginPage from './components/LoginPage';
 
 function App() {
-  const { redditApi, login } = useRedditApi();
+  const { redditApi } = useRedditApi();
 
   useEffect(() => {
     if (!redditApi) {
@@ -12,7 +13,7 @@ function App() {
     }
 
     redditApi.fetchSubscribedSubreddits().then((subreddits) => {
-      const subredditNames = subreddits.map(subreddit => subreddit.data.display_name.toLowerCase());
+      const subredditNames = subreddits.map((subreddit) => subreddit.data.display_name.toLowerCase());
       console.log(subredditNames);
 
       getSimilarSubreddits(subredditNames).then((similarSubreddits) => {
@@ -26,9 +27,7 @@ function App() {
       {redditApi ? (
         <div>Logged in!</div>
       ) : (
-        <div>
-          <button onClick={login}>Log in</button>
-        </div>
+        <LoginPage className={styles.loginPage} />
       )}
     </div>
   );

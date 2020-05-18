@@ -1,0 +1,41 @@
+$colorBackground: black;
+$colorForeground: white;
+$colorAccent: #598cef;
+
+$shadowStandard: 0 8px 24px 0 rgba(0, 0, 0, 0.1);
+
+$timingStandard: .3s cubic-bezier(0.23, 1, 0.32, 1);
+
+$borderRadius: 2px;
+
+$widthContent: 1200px;
+$widthContentPadding: 2rem;
+
+$tabletPortraitBreakpoint: 600px;
+$tabletLandscapeBreakpoint: 900px;
+$desktopBreakpoint: 1200px;
+$bigDesktopBreakpoint: 1800px;
+
+$fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+// $fontFamilyAlt: 'Space Mono', monospace;
+
+$fontSizeXS: 12px;
+$fontSizeS: 14px;
+$fontSizeM: 16px;
+$fontSizeL: 18px;
+$fontSizeXL: 20px;
+$fontSize2XL: 24px;
+$fontSize3XL: 30px;
+$fontSize4XL: 36px;
+$fontSize5XL: 48px;
+$fontSize6XL: 60px;
+$fontSize7XL: 72px;
+$fontSize8XL: 96px;
+
+$fontSizeSectionTitle: $fontSize4XL;
+$fontSizeSectionSubtitle: $fontSize2XL;
+
+$spacingSectionPaddingL: 10rem;
+$spacingSectionPaddingM: $spacingSectionPaddingL * 3/4;
+$spacingSectionPaddingS: $spacingSectionPaddingL * 2/4;
+$spacingSectionPaddingXS: $spacingSectionPaddingL * 1/4;

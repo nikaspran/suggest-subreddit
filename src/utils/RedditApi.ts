@@ -62,7 +62,7 @@ export async function fetchAccessToken(code: string) {
   } as RedditAuthToken;
 }
 
-interface Subreddit {
+export interface Subreddit {
   kind: string;
   data: {
     display_name: string;

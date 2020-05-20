@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import workerFn, { WorkerInput, WorkerOutput } from './similarSubreddits.worker';
+import workerFn, { WorkerInput, WorkerOutput, SimilarityResult } from './similarSubreddits.worker';
 
 const TIMEOUT_S = 10;
 
@@ -15,7 +15,7 @@ export async function getSimilarSubreddits(sourceSubreddits: string[], {
   count = 10,
 }: {
   count?: number;
-} = {}) {
+} = {}): Promise<SimilarityResult> {
   return new Promise((resolve, reject) => {
     worker = worker || createWorker();
 

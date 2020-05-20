@@ -6,8 +6,8 @@ export interface WorkerInput {
   count: number;
 }
 
-type Score = number;
-interface SimilarityResult {
+export type Score = number;
+export interface SimilarityResult {
   [subreddit: string]: {
     score: Score;
     contributors: { [contributor: string]: Score };
@@ -33,7 +33,7 @@ export default () => {
       request.addEventListener('load', listener);
       try {
         // eslint-disable-next-line no-restricted-globals
-        request.open('GET', `${self.location.origin}/similarSubreddits.json`);
+        request.open('GET', `${self.location.origin}${process.env.PUBLIC_URL}/similarSubreddits.json`);
         request.send();
       } catch (error) {
         reject(error);

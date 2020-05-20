@@ -1,0 +1,21 @@
+.suggestions {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > *:first-child {
+    margin-bottom: 1rem;
+  }
+}

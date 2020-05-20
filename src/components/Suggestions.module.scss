@@ -1,0 +1,5 @@
+.suggestion {
+  & + & {
+    margin-top: 1rem;
+  }
+}

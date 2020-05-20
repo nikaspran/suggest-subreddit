@@ -1,0 +1,65 @@
+@import '../variables.scss';
+
+.suggestion {
+  border-radius: $borderRadius;
+  background: white;
+  box-shadow: $shadowStandard;
+
+  display: flex;
+  align-items: center;
+
+  > *:first-child {
+    flex: 1 1 auto;
+  }
+}
+
+.content {
+  padding: 1rem;
+}
+
+.title {
+  color: orangered;
+  font-weight: bold;
+  font-size: $fontSizeXL;
+  margin-bottom: .5rem;
+  display: block;
+  text-decoration: none;
+}
+
+.score {
+  font-size: $fontSize5XL;
+}
+
+.description {
+  font-size: $fontSizeXS;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  align-self: stretch;
+}
+
+.excludeButton,
+.infoButton {
+  background: none;
+  border-radius: none;
+  outline: none;
+  border: none;
+  border-left: 1px solid $colorMuted;
+  cursor: pointer;
+  flex: 1 1 auto;
+}
+
+.excludeButton {
+  border-bottom: 1px solid $colorMuted;
+}
+
+.infoButton {
+
+}

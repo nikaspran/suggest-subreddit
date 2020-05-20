@@ -1,0 +1,52 @@
+import React, { useEffect, useState } from 'react';
+import styles from './SuggestionPage.module.scss';
+import Suggestions from './Suggestions';
+import { useRedditApi } from './RedditApiProvider';
+import { Subreddit } from '../utils/RedditApi';
+import { getSimilarSubreddits } from '../utils/similarSubreddits';
+import { SimilarityResult } from '../utils/similarSubreddits.worker';
+import Loading from './Loading';
+
+export default function SuggestionPage() {
+  const { redditApi } = useRedditApi();
+  const [similarSubreddits, setSimilarSubreddits] = useState<SimilarityResult>();
+  const [subscribedSubreddits, setSubscribedSubreddits] = useState<Subreddit[]>();
+  const [loadingState, setLoadingState] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (!redditApi) {
+      return;
+    }
+
+    setLoadingState('Fetching your subreddits (1/2)...');
+    redditApi.fetchSubscribedSubreddits()
+      .then((subreddits) => {
+        setSubscribedSubreddits(subreddits);
+        setLoadingState('Calculating similar subreddits (2/2)...');
+
+        const subredditNames = subreddits.map((subreddit) => subreddit.data.display_name.toLowerCase());
+        return getSimilarSubreddits(subredditNames);
+      })
+      .then(setSimilarSubreddits)
+      .then(() => {
+        setLoadingState(undefined);
+      });
+  }, [redditApi]);
+
+  return (
+    <div className={styles.container}>
+      {similarSubreddits ? (
+        <Suggestions
+          data={similarSubreddits}
+          className={styles.suggestions}
+          subscribedSubreddits={subscribedSubreddits || []}
+        />
+      ) : (
+        <div className={styles.loadingContainer}>
+          <div>{loadingState}</div>
+          <Loading />
+        </div>
+      )}
+    </div>
+  );
+}

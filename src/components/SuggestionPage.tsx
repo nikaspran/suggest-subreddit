@@ -7,7 +7,9 @@ import { getSimilarSubreddits } from '../utils/similarSubreddits';
 import { SimilarityResult } from '../utils/similarSubreddits.worker';
 import Loading from './Loading';
 import Layout from './Layout';
-import LinkButton from './LinkButton';
+import Link from './Link';
+import FlexSpacer from './FlexSpacer';
+import Footer from './Footer';
 
 export default function SuggestionPage() {
   const { redditApi, logout } = useRedditApi();
@@ -40,8 +42,14 @@ export default function SuggestionPage() {
       {similarSubreddits ? (
         <>
           <div className={styles.description}>
+            <FlexSpacer />
+
             <h1 className={styles.title}>Suggest me a subreddit</h1>
-            <LinkButton onClick={logout}>Logout</LinkButton>
+            <Link element="button" onClick={logout} className={styles.logoutLink}>Logout</Link>
+
+            <FlexSpacer />
+
+            <Footer />
           </div>
           <Suggestions
             data={similarSubreddits}

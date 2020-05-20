@@ -1,0 +1,18 @@
+@import '../variables.scss';
+
+.link {
+  background: none;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+
+  color: $colorLink;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button.link {
+  border: none;
+}

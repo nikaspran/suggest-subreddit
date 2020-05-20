@@ -1,0 +1,18 @@
+@import '../variables.scss';
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: $fontSizeS;
+
+  > * {
+    display: block;
+  }
+
+  > * + * {
+    padding-left: 1rem;
+    border-left: 1px solid $colorMuted;
+    margin-left: 1rem;
+  }
+}

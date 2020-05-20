@@ -7,9 +7,10 @@ import { getSimilarSubreddits } from '../utils/similarSubreddits';
 import { SimilarityResult } from '../utils/similarSubreddits.worker';
 import Loading from './Loading';
 import Layout from './Layout';
+import LinkButton from './LinkButton';
 
 export default function SuggestionPage() {
-  const { redditApi } = useRedditApi();
+  const { redditApi, logout } = useRedditApi();
   const [similarSubreddits, setSimilarSubreddits] = useState<SimilarityResult>();
   const [subscribedSubreddits, setSubscribedSubreddits] = useState<Subreddit[]>();
   const [loadingState, setLoadingState] = useState<string | undefined>(undefined);
@@ -40,11 +41,12 @@ export default function SuggestionPage() {
         <>
           <div className={styles.description}>
             <h1 className={styles.title}>Suggest me a subreddit</h1>
+            <LinkButton onClick={logout}>Logout</LinkButton>
           </div>
           <Suggestions
             data={similarSubreddits}
             className={styles.suggestions}
-            subscribedSubreddits={subscribedSubreddits || []}
+            totalSubreddits={subscribedSubreddits?.length || 0}
           />
         </>
       ) : (

@@ -8,10 +8,15 @@ function login() {
   redirectToAuth();
 }
 
+function logout() {
+  localStorage.removeItem(TOKEN_KEY);
+}
+
 const RedditApiContext = React.createContext<{
   redditApi: RedditApi | undefined;
   login: typeof login;
-}>({ redditApi: undefined, login });
+  logout: typeof logout;
+}>({ redditApi: undefined, login, logout });
 
 function retrieveToken() {
   const storedToken = localStorage.getItem(TOKEN_KEY);
@@ -21,7 +26,7 @@ function retrieveToken() {
 
   const jsonToken = JSON.parse(storedToken) as RedditAuthToken;
   if (!jsonToken.expires_at || jsonToken.expires_at < Date.now() - EXPIRATION_BUFFER_MS) {
-    localStorage.removeItem(TOKEN_KEY);
+    logout();
     return undefined;
   }
   return jsonToken;
@@ -59,7 +64,16 @@ export default function RedditApiProvider({
   }, []);
 
   return (
-    <RedditApiContext.Provider value={{ redditApi, login }}>
+    <RedditApiContext.Provider
+      value={{
+        redditApi,
+        login,
+        logout: () => {
+          logout();
+          setRedditApi(undefined);
+        },
+      }}
+    >
       {children}
     </RedditApiContext.Provider>
   );

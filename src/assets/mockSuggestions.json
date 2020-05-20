@@ -1,0 +1,163 @@
+{
+  "nottheonion": {
+    "score": 6,
+    "contributors": {
+      "bestof": 1,
+      "history": 1,
+      "fitness": 1,
+      "askscience": 1,
+      "netflix": 1,
+      "announcements": 1
+    }
+  },
+  "reactiongifs": {
+    "score": 5,
+    "contributors": {
+      "bestof": 1,
+      "netflix": 1,
+      "announcements": 1,
+      "youtubehaiku": 1,
+      "accidentalrenaissance": 1
+    }
+  },
+  "news": {
+    "score": 4,
+    "contributors": {
+      "worldnews": 1,
+      "bestof": 1,
+      "history": 1,
+      "fitness": 1
+    }
+  },
+  "UpliftingNews": {
+    "score": 4,
+    "contributors": {
+      "worldnews": 1,
+      "history": 1,
+      "askscience": 1,
+      "announcements": 1
+    }
+  },
+  "MovieDetails": {
+    "score": 4,
+    "contributors": {
+      "movies": 1,
+      "netflix": 1,
+      "youtubehaiku": 1,
+      "accidentalrenaissance": 1
+    }
+  },
+  "SubredditDrama": {
+    "score": 4,
+    "contributors": {
+      "bestof": 1,
+      "truereddit": 1,
+      "announcements": 1,
+      "youtubehaiku": 1
+    }
+  },
+  "OutOfTheLoop": {
+    "score": 4,
+    "contributors": {
+      "bestof": 1,
+      "netflix": 1,
+      "announcements": 1,
+      "truegaming": 1
+    }
+  },
+  "IAmA": {
+    "score": 4,
+    "contributors": {
+      "bestof": 1,
+      "history": 1,
+      "askscience": 1,
+      "announcements": 1
+    }
+  },
+  "todayilearned": {
+    "score": 4,
+    "contributors": {
+      "bestof": 1,
+      "history": 1,
+      "fitness": 1,
+      "science": 1
+    }
+  },
+  "JusticeServed": {
+    "score": 4,
+    "contributors": {
+      "bestof": 1,
+      "netflix": 1,
+      "accidentalrenaissance": 1,
+      "cozyplaces": 1
+    }
+  },
+  "EverythingScience": {
+    "score": 4,
+    "contributors": {
+      "tech": 1,
+      "foodforthought": 1,
+      "gamernews": 1,
+      "science": 1
+    }
+  },
+  "space": {
+    "score": 4,
+    "contributors": {
+      "history": 1,
+      "askscience": 1,
+      "announcements": 1,
+      "futurology": 1
+    }
+  },
+  "HistoryMemes": {
+    "score": 4,
+    "contributors": {
+      "history": 1,
+      "mountandblade": 1,
+      "crusaderkings": 1,
+      "youtubehaiku": 1
+    }
+  },
+  "therewasanattempt": {
+    "score": 4,
+    "contributors": {
+      "programmerhumor": 1,
+      "accidentalrenaissance": 1,
+      "cozyplaces": 1,
+      "evilbuildings": 1
+    }
+  },
+  "business": {
+    "score": 3,
+    "contributors": {
+      "worldnews": 1,
+      "tech": 1,
+      "truereddit": 1
+    }
+  },
+  "Economics": {
+    "score": 3,
+    "contributors": {
+      "worldnews": 1,
+      "truereddit": 1,
+      "foodforthought": 1
+    }
+  },
+  "gadgets": {
+    "score": 3,
+    "contributors": {
+      "technology": 1,
+      "history": 1,
+      "askscience": 1
+    }
+  },
+  "technews": {
+    "score": 3,
+    "contributors": {
+      "technology": 1,
+      "tech": 1,
+      "gamernews": 1
+    }
+  }
+}

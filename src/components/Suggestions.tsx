@@ -2,16 +2,15 @@ import React from 'react';
 import styles from './Suggestions.module.scss';
 import { SimilarityResult } from '../utils/similarSubreddits.worker';
 import Suggestion from './Suggestion';
-import { Subreddit } from '../utils/RedditApi';
 
 export default function Suggestions({
   className,
   data,
-  subscribedSubreddits,
+  totalSubreddits,
 }: {
   className?: string;
   data: SimilarityResult;
-  subscribedSubreddits: Subreddit[];
+  totalSubreddits: number;
 }) {
   return (
     <div className={className}>
@@ -19,7 +18,7 @@ export default function Suggestions({
         <Suggestion
           key={subreddit}
           subreddit={subreddit}
-          score={meta.score / subscribedSubreddits.length}
+          score={meta.score / totalSubreddits}
           contributors={meta.contributors}
           className={styles.suggestion}
         />

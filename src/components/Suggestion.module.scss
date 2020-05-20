@@ -23,6 +23,13 @@
   border-top: 1px solid #EDF2F7;
   padding: 1rem;
   background-color: #F7FAFC;
+  line-height: 1.5em;
+
+  a {
+    color: #2A4365;
+    text-decoration: none;
+    font-weight: 500;
+  }
 }
 
 .content {

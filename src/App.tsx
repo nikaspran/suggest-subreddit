@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './App.module.scss';
 import RedditApiProvider, { useRedditApi } from './components/RedditApiProvider';
 import LoginPage from './components/LoginPage';

@@ -6,6 +6,7 @@ import { Subreddit } from '../utils/RedditApi';
 import { getSimilarSubreddits } from '../utils/similarSubreddits';
 import { SimilarityResult } from '../utils/similarSubreddits.worker';
 import Loading from './Loading';
+import Layout from './Layout';
 
 export default function SuggestionPage() {
   const { redditApi } = useRedditApi();
@@ -34,7 +35,7 @@ export default function SuggestionPage() {
   }, [redditApi]);
 
   return (
-    <div className={styles.container}>
+    <Layout className={styles.container}>
       {similarSubreddits ? (
         <Suggestions
           data={similarSubreddits}
@@ -47,6 +48,6 @@ export default function SuggestionPage() {
           <Loading />
         </div>
       )}
-    </div>
+    </Layout>
   );
 }

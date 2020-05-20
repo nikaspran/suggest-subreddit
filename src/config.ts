@@ -5,7 +5,7 @@ const dev = {
 
 const prod = {
   REDDIT_CLIENT_ID: 'ubcs049_cdvODQ',
-  REDDIT_REDIRECT_URI: 'https://nikaspran.github.io/suggest-subreddit',
+  REDDIT_REDIRECT_URI: 'https://nikas.praninskas.com/suggest-subreddit/',
 };
 
 export default process.env.NODE_ENV === 'production' ? prod : dev;

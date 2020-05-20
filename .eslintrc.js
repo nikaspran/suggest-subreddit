@@ -11,7 +11,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
   ],
   rules: {
-    'max-len': ['error', { code: 120 }],
+    'max-len': ['error', { code: 120, ignoreComments: true }],
     'newline-per-chained-call': ['off'],
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': ['error', {

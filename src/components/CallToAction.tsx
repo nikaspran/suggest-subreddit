@@ -7,7 +7,6 @@ export default function CallToAction({
   ...otherProps
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    // eslint-disable-next-line react/button-has-type
-    <button className={classNames(styles.callToAction, className)} {...otherProps} />
+    <button className={classNames(styles.callToAction, className)} {...otherProps} /> // eslint-disable-line react/button-has-type
   );
 }

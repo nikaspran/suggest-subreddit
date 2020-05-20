@@ -12,8 +12,7 @@ export default function Link({
 )) {
   if (element === 'a') {
     return (
-      // eslint-disable-next-line jsx-a11y/anchor-has-content
-      <a
+      <a // eslint-disable-line jsx-a11y/anchor-has-content
         className={classNames(styles.link, className)}
         rel="noopener noreferrer"
         target="blank"
@@ -23,8 +22,7 @@ export default function Link({
   }
 
   return (
-    // eslint-disable-next-line react/button-has-type
-    <button
+    <button // eslint-disable-line react/button-has-type
       className={classNames(styles.link, className)}
       {...otherProps as ButtonHTMLAttributes<HTMLButtonElement>}
     />

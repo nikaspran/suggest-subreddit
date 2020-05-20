@@ -5,7 +5,7 @@ import Link from './Link';
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <Link href="https://github.com/nikaspran/suggest-subreddit">Github</Link>
+      <Link href="https://github.com/nikaspran/suggest-subreddit">GitHub</Link>
       <Link href="https://twitter.com/nikaspran" className={styles.twitterLink}>@nikaspran</Link>
     </footer>
   );

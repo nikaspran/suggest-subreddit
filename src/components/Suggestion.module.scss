@@ -1,16 +1,28 @@
 @import '../variables.scss';
 
 .suggestion {
+  border-left: 3px solid $colorAccent;
   border-radius: $borderRadius;
   background: white;
   box-shadow: $shadowStandard;
+}
 
+.contentContainer {
   display: flex;
   align-items: center;
+  z-index: 1;
+  background: white;
 
   > *:first-child {
     flex: 1 1 auto;
   }
+}
+
+.details {
+  font-size: $fontSizeXS;
+  border-top: 1px solid #EDF2F7;
+  padding: 1rem;
+  background-color: #F7FAFC;
 }
 
 .content {
@@ -45,21 +57,33 @@
   align-self: stretch;
 }
 
-.excludeButton,
-.infoButton {
+.excludeButton {
   background: none;
   border-radius: none;
   outline: none;
   border: none;
-  border-left: 1px solid $colorMuted;
   cursor: pointer;
-  flex: 1 1 auto;
-}
 
-.excludeButton {
-  border-bottom: 1px solid $colorMuted;
-}
+  margin-top: .5rem;
+  margin-right: .5rem;
+  padding: .5rem;
 
-.infoButton {
+  > svg {
+    stroke: $colorMuted;
+    display: block;
+    height: 1rem;
+    width: 1rem;
 
+    $animationTiming: cubic-bezier(.17,.67,.83,.67) .05s;
+    transition: stroke-width $animationTiming, stroke $animationTiming;
+  }
+
+  &:hover > svg {
+    stroke: $colorAccent;
+    stroke-width: 10px;
+  }
+
+  &:active > svg {
+    stroke-width: 8px;
+  }
 }

@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState, useContext } from 'react';
 import RedditApi, { RedditAuthToken, fetchAccessToken, redirectToAuth } from '../utils/RedditApi';
 
 const TOKEN_KEY = 'redditApiToken';
-const EXPIRATION_BUFFER_MS = 60 * 1000;
+const EXPIRATION_BUFFER_MS = 10 * 60 * 1000;
 
 function login() {
   redirectToAuth();

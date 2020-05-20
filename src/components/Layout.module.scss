@@ -1,0 +1,9 @@
+.layout {
+  display: flex;
+
+  > * {
+    flex: 1 1 auto;
+    padding: 3rem;
+    overflow-y: scroll;
+  }
+}

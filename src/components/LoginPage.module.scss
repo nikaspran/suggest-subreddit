@@ -1,5 +1,9 @@
 @import "../variables.scss";
 
+.loginPage {
+  height: 100vh;
+}
+
 .loginContainer {
   display: flex;
   flex-direction: column;

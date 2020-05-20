@@ -20,13 +20,13 @@
 
 .details {
   font-size: $fontSizeXS;
-  border-top: 1px solid #EDF2F7;
   padding: 1rem;
-  background-color: #F7FAFC;
   line-height: 1.5em;
+  border-top: 1px solid $colorMutedLight;
+  background-color: $colorMutedLightest;
 
   a {
-    color: #2A4365;
+    color: $colorLink;
     text-decoration: none;
     font-weight: 500;
   }

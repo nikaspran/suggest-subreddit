@@ -37,11 +37,16 @@ export default function SuggestionPage() {
   return (
     <Layout className={styles.container}>
       {similarSubreddits ? (
-        <Suggestions
-          data={similarSubreddits}
-          className={styles.suggestions}
-          subscribedSubreddits={subscribedSubreddits || []}
-        />
+        <>
+          <div className={styles.description}>
+            <h1 className={styles.title}>Suggest me a subreddit</h1>
+          </div>
+          <Suggestions
+            data={similarSubreddits}
+            className={styles.suggestions}
+            subscribedSubreddits={subscribedSubreddits || []}
+          />
+        </>
       ) : (
         <div className={styles.loadingContainer}>
           <div>{loadingState}</div>

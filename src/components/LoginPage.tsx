@@ -16,7 +16,7 @@ export default function LoginPage({
   const { login } = useRedditApi();
 
   return (
-    <Layout className={className}>
+    <Layout className={styles.loginPage}>
       <div className={styles.loginContainer}>
         <h1 className={styles.title}>Suggest me a subreddit</h1>
         <CallToAction type="button" onClick={login}>Fetch my subreddits via Reddit</CallToAction>

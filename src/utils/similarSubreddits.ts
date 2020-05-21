@@ -23,13 +23,11 @@ export interface WorkerOutput {
 }
 
 function createWorker() {
-  // const code = workerFn.toString();
-  // const blob = new Blob([`(${code})()`]);
   return new Worker(`${process.env.PUBLIC_URL}/similarSubreddits.worker.js`);
 }
 
 export async function getSimilarSubreddits(sourceSubreddits: string[], {
-  count = 10,
+  count = 20,
 }: {
   count?: number;
 } = {}): Promise<SimilarityResult> {

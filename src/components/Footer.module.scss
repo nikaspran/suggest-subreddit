@@ -15,4 +15,8 @@
     border-left: 1px solid $colorMuted;
     margin-left: 1rem;
   }
+
+  @include whenSmall {
+    margin-top: 1rem;
+  }
 }

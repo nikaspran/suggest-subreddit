@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .layout {
   display: flex;
 
@@ -8,5 +10,16 @@
     padding-right: 3rem;
     padding-bottom: 1rem;
     overflow-y: scroll;
+  }
+
+  @include whenSmall {
+    flex-direction: column;
+
+    > * {
+      padding-top: 1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      overflow-y: visible;
+    }
   }
 }

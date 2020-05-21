@@ -14,6 +14,11 @@
 .title {
   font-size: $fontSize3XL;
   margin-bottom: 1rem;
+  text-align: center;
+
+  @include whenSmall {
+    margin-bottom: .5rem;
+  }
 }
 
 .logoutLink {

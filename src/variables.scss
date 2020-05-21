@@ -22,6 +22,18 @@ $tabletLandscapeBreakpoint: 900px;
 $desktopBreakpoint: 1200px;
 $bigDesktopBreakpoint: 1800px;
 
+@mixin whenSmall {
+  @media (max-width: $tabletLandscapeBreakpoint) {
+    @content;
+  }
+}
+
+@mixin whenExtraSmall {
+  @media (max-width: $tabletPortraitBreakpoint) {
+    @content;
+  }
+}
+
 $fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 // $fontFamilyAlt: 'Space Mono', monospace;
 

@@ -22,7 +22,7 @@ async function fetchSimilarities() {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-async function getSimilarSubreddits({ sourceSubreddits, count = 10 }) {
+async function getSimilarSubreddits({ sourceSubreddits, count = 10, exclude }) {
   waitForSimilarities = waitForSimilarities || fetchSimilarities();
 
   const similarTo = await waitForSimilarities;
@@ -45,6 +45,7 @@ async function getSimilarSubreddits({ sourceSubreddits, count = 10 }) {
 
 
   const sortedEntries = Object.entries(result)
+    .filter(([subreddit]) => !exclude.has(subreddit))
     .sort(([, a], [, b]) => b.score - a.score)
     .slice(0, count);
 

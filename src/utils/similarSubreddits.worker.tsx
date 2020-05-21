@@ -33,6 +33,8 @@ export default () => {
       request.addEventListener('load', listener);
       try {
         // eslint-disable-next-line no-restricted-globals
+        console.log(`${self.location.origin}${process.env.PUBLIC_URL}/similarSubreddits.json`);
+        // eslint-disable-next-line no-restricted-globals
         request.open('GET', `${self.location.origin}${process.env.PUBLIC_URL}/similarSubreddits.json`);
         request.send();
       } catch (error) {

@@ -55,7 +55,7 @@ export default function RedditApiProvider({
 
     const [, code] = window.location.search.match(/code=([^&]+)/) || [];
     if (code) {
-      window.history.replaceState(null, '', '/');
+      window.history.replaceState(null, '', window.location.pathname);
       fetchAccessToken(code).then((newToken) => {
         storeToken(newToken);
         setRedditApi(new RedditApi(newToken));

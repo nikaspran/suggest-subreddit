@@ -23,11 +23,13 @@ export default function Suggestion({
   subreddit,
   score,
   contributors,
+  onExclude,
 }: {
   className?: string;
   subreddit: string;
   score: Score;
   contributors: { [contributor: string]: Score };
+  onExclude?: () => unknown;
 }) {
   return (
     <div className={classNames(styles.suggestion, className)}>
@@ -41,9 +43,11 @@ export default function Suggestion({
         </div>
 
         <div className={styles.controls}>
-          <button type="button" className={styles.excludeButton} title="Exclude subreddit">
-            <Cross />
-          </button>
+          {onExclude && (
+            <button type="button" className={styles.excludeButton} title="Exclude subreddit" onClick={onExclude}>
+              <Cross />
+            </button>
+          )}
         </div>
       </div>
 

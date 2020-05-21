@@ -7,10 +7,12 @@ export default function Suggestions({
   className,
   data,
   totalSubreddits,
+  onExclude,
 }: {
   className?: string;
   data: SimilarityResult;
   totalSubreddits: number;
+  onExclude?: (subreddit: string) => unknown;
 }) {
   return (
     <div className={className}>
@@ -21,6 +23,7 @@ export default function Suggestions({
           score={meta.score / totalSubreddits}
           contributors={meta.contributors}
           className={styles.suggestion}
+          onExclude={onExclude && (() => onExclude(subreddit))}
         />
       ))}
     </div>

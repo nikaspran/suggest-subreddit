@@ -28,8 +28,10 @@ function createWorker() {
 
 export async function getSimilarSubreddits(sourceSubreddits: string[], {
   count = 20,
+  exclude = new Set(),
 }: {
   count?: number;
+  exclude?: Set<string>;
 } = {}): Promise<SimilarityResult> {
   return new Promise((resolve, reject) => {
     worker = worker || createWorker();
@@ -39,6 +41,7 @@ export async function getSimilarSubreddits(sourceSubreddits: string[], {
     worker.postMessage({
       invocationKey,
       sourceSubreddits,
+      exclude,
       count,
     } as WorkerInput);
 

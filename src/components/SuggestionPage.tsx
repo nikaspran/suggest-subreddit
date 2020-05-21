@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import styles from './SuggestionPage.module.scss';
 import Suggestions from './Suggestions';
 import { useRedditApi } from './RedditApiProvider';
@@ -9,14 +9,26 @@ import Layout from './Layout';
 import Link from './Link';
 import FlexSpacer from './FlexSpacer';
 import Footer from './Footer';
+import { useExclusions } from './ExclusionProvider';
+
+function without<T extends { [key: string]: unknown }>(obj: T, excludedKey: string) {
+  return Object.keys(obj).reduce((previous, current) => {
+    if (current === excludedKey) {
+      return previous;
+    }
+    return { ...previous, [current]: obj[current] };
+  }, {}) as T;
+}
 
 export default function SuggestionPage() {
   const { redditApi, logout } = useRedditApi();
+  const { excludedSubreddits, exclude } = useExclusions();
   const [similarSubreddits, setSimilarSubreddits] = useState<SimilarityResult>();
   const [subscribedSubreddits, setSubscribedSubreddits] = useState<Subreddit[]>();
   const [loadingState, setLoadingState] = useState<string | undefined>(undefined);
+  const [refreshVisible, setRefreshVisible] = useState(false);
 
-  useEffect(() => {
+  const refreshSuggestions = useMemo(() => () => {
     if (!redditApi) {
       return;
     }
@@ -28,17 +40,26 @@ export default function SuggestionPage() {
         setLoadingState('Calculating similar subreddits (2/2)...');
 
         const subredditNames = subreddits.map((subreddit) => subreddit.data.display_name.toLowerCase());
-        return getSimilarSubreddits(subredditNames);
+        return getSimilarSubreddits(subredditNames, {
+          count: 20,
+          exclude: excludedSubreddits,
+        });
       })
       .then(setSimilarSubreddits)
       .then(() => {
         setLoadingState(undefined);
       });
-  }, [redditApi]);
+  }, [redditApi, excludedSubreddits]);
+
+  useEffect(() => {
+    if (!similarSubreddits) {
+      refreshSuggestions();
+    }
+  }, [similarSubreddits, refreshSuggestions]);
 
   return (
     <Layout className={styles.container}>
-      {similarSubreddits ? (
+      {(!loadingState && similarSubreddits) ? (
         <>
           <div className={styles.description}>
             <FlexSpacer />
@@ -50,11 +71,23 @@ export default function SuggestionPage() {
 
             <Footer />
           </div>
-          <Suggestions
-            data={similarSubreddits}
-            className={styles.suggestions}
-            totalSubreddits={subscribedSubreddits?.length || 0}
-          />
+
+          <div>
+            {refreshVisible && (
+              <Link element="button" onClick={refreshSuggestions} className={styles.refreshButton}>Refresh</Link>
+            )}
+
+            <Suggestions
+              data={similarSubreddits}
+              className={styles.suggestions}
+              totalSubreddits={subscribedSubreddits?.length || 0}
+              onExclude={(subreddit) => {
+                setRefreshVisible(true);
+                setSimilarSubreddits((previous) => without(previous || {}, subreddit));
+                exclude(subreddit);
+              }}
+            />
+          </div>
         </>
       ) : (
         <div className={styles.loadingContainer}>

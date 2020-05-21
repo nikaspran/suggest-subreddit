@@ -1,14 +1,31 @@
 /* eslint-disable import/prefer-default-export */
-import workerFn, { WorkerInput, WorkerOutput, SimilarityResult } from './similarSubreddits.worker';
-
 const TIMEOUT_S = 10;
 
 let worker: Worker | undefined;
 
+export interface WorkerInput {
+  invocationKey: string;
+  sourceSubreddits: string[];
+  count: number;
+}
+
+export type Score = number;
+export interface SimilarityResult {
+  [subreddit: string]: {
+    score: Score;
+    contributors: { [contributor: string]: Score };
+  };
+}
+
+export interface WorkerOutput {
+  invocationKey: string;
+  result: SimilarityResult;
+}
+
 function createWorker() {
-  const code = workerFn.toString();
-  const blob = new Blob([`(${code})()`]);
-  return new Worker(URL.createObjectURL(blob));
+  // const code = workerFn.toString();
+  // const blob = new Blob([`(${code})()`]);
+  return new Worker(`${process.env.PUBLIC_URL}/similarSubreddits.worker.js`);
 }
 
 export async function getSimilarSubreddits(sourceSubreddits: string[], {

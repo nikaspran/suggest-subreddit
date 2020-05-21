@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Suggestions.module.scss';
-import { SimilarityResult } from '../utils/similarSubreddits.worker';
+import { SimilarityResult } from '../utils/similarSubreddits';
 import Suggestion from './Suggestion';
 
 export default function Suggestions({

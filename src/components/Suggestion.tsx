@@ -1,6 +1,6 @@
 import React, { AnchorHTMLAttributes } from 'react';
 import classNames from 'classnames';
-import { Score } from '../utils/similarSubreddits.worker';
+import { Score } from '../utils/similarSubreddits';
 import styles from './Suggestion.module.scss';
 import CommaSeparatedList from './CommaSeparatedList';
 import { ReactComponent as Cross } from '../assets/cross.svg';

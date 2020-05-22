@@ -10,6 +10,7 @@ import Link from './Link';
 import FlexSpacer from './FlexSpacer';
 import Footer from './Footer';
 import { useExclusions } from './ExclusionProvider';
+import ErrorNotification from './ErrorNotification';
 
 function without<T extends { [key: string]: unknown }>(obj: T, excludedKey: string) {
   return Object.keys(obj).reduce((previous, current) => {
@@ -23,6 +24,7 @@ function without<T extends { [key: string]: unknown }>(obj: T, excludedKey: stri
 export default function SuggestionPage() {
   const { redditApi, logout } = useRedditApi();
   const { excludedSubreddits, exclude } = useExclusions();
+  const [error, setError] = useState<string>();
   const [similarSubreddits, setSimilarSubreddits] = useState<SimilarityResult>();
   const [subscribedSubreddits, setSubscribedSubreddits] = useState<Subreddit[]>();
   const [loadingState, setLoadingState] = useState<string | undefined>(undefined);
@@ -35,6 +37,9 @@ export default function SuggestionPage() {
 
     setLoadingState('Fetching your subreddits (1/2)...');
     redditApi.fetchSubscribedSubreddits()
+      .catch(() => (
+        Promise.reject(new Error('Could not fetch your subreddits, please refresh the page or try again later'))
+      ))
       .then((subreddits) => {
         setSubscribedSubreddits(subreddits);
         setLoadingState('Calculating similar subreddits (2/2)...');
@@ -43,11 +48,18 @@ export default function SuggestionPage() {
         return getSimilarSubreddits(subredditNames, {
           count: 20,
           exclude: excludedSubreddits,
-        });
+        }).catch(() => (
+          Promise.reject((
+            new Error('Could not calculate similar subreddits, please refresh the page or try again later')
+          ))
+        ));
       })
       .then(setSimilarSubreddits)
       .then(() => {
         setLoadingState(undefined);
+      })
+      .catch((e) => {
+        setError(e.message);
       });
   }, [redditApi, excludedSubreddits]);
 
@@ -92,7 +104,13 @@ export default function SuggestionPage() {
       ) : (
         <div className={styles.loadingContainer}>
           <div>{loadingState}</div>
-          <Loading />
+          {!error && <Loading />}
+
+          {error && (
+            <ErrorNotification title="An error has occurred" className={styles.error}>
+              {error}
+            </ErrorNotification>
+          )}
         </div>
       )}
     </Layout>

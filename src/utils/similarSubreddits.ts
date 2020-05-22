@@ -19,7 +19,8 @@ export interface SimilarityResult {
 
 export interface WorkerOutput {
   invocationKey: string;
-  result: SimilarityResult;
+  result?: SimilarityResult;
+  error: string;
 }
 
 function createWorker() {
@@ -62,7 +63,11 @@ export async function getSimilarSubreddits(sourceSubreddits: string[], {
       worker!.removeEventListener('message', resultListener);
       clearTimeout(timeout);
 
-      resolve(data.result);
+      if (data.result) {
+        resolve(data.result);
+      } else {
+        reject(new Error(data.error));
+      }
     }
 
     worker.addEventListener('message', resultListener);

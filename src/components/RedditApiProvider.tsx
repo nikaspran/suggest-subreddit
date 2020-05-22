@@ -14,9 +14,10 @@ function logout() {
 
 const RedditApiContext = React.createContext<{
   redditApi: RedditApi | undefined;
+  authError: string | undefined;
   login: typeof login;
   logout: typeof logout;
-}>({ redditApi: undefined, login, logout });
+}>({ redditApi: undefined, authError: undefined, login, logout });
 
 function retrieveToken() {
   const storedToken = localStorage.getItem(TOKEN_KEY);
@@ -44,6 +45,7 @@ export default function RedditApiProvider({
   children: ReactNode;
 }) {
   const [redditApi, setRedditApi] = useState<RedditApi>();
+  const [authError, setAuthError] = useState<string>();
 
   useEffect(() => {
     const token = retrieveToken();
@@ -56,10 +58,14 @@ export default function RedditApiProvider({
     const [, code] = window.location.search.match(/code=([^&]+)/) || [];
     if (code) {
       window.history.replaceState(null, '', window.location.pathname);
-      fetchAccessToken(code).then((newToken) => {
-        storeToken(newToken);
-        setRedditApi(new RedditApi(newToken));
-      });
+      fetchAccessToken(code)
+        .then((newToken) => {
+          storeToken(newToken);
+          setRedditApi(new RedditApi(newToken));
+        })
+        .catch(() => {
+          setAuthError('Could not authenticate with Reddit, please try again later');
+        });
     }
   }, []);
 
@@ -67,6 +73,7 @@ export default function RedditApiProvider({
     <RedditApiContext.Provider
       value={{
         redditApi,
+        authError,
         login,
         logout: () => {
           logout();

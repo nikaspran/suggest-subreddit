@@ -1,0 +1,20 @@
+@import '../variables.scss';
+
+.error {
+  border-radius: $borderRadius;
+  background-color: #FFF5F5;
+  border: 1px solid #E53E3E;
+  color: #E53E3E;
+  padding: 1rem;
+  font-size: $fontSizeS;
+  max-width: 400px;
+
+  strong {
+    display: block;
+    margin-bottom: .5rem;
+  }
+
+  p {
+    margin: 0;
+  }
+}

@@ -6,7 +6,11 @@ async function fetchSimilarities() {
   return new Promise((resolve, reject) => {
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     function listener() {
-      resolve(JSON.parse(this.responseText));
+      try {
+        resolve(JSON.parse(this.responseText));
+      } catch (error) {
+        reject(error);
+      }
     }
 
     const request = new XMLHttpRequest();
@@ -59,8 +63,17 @@ async function getSimilarSubreddits({ sourceSubreddits, count = 10, exclude }) {
 self.addEventListener('message', async (event) => {
   const { data } = event;
 
-  postMessage({
-    invocationKey: data.invocationKey,
-    result: await getSimilarSubreddits(data),
-  });
+  try {
+    const result = await getSimilarSubreddits(data);
+
+    postMessage({
+      invocationKey: data.invocationKey,
+      result,
+    });
+  } catch (error) {
+    postMessage({
+      invocationKey: data.invocationKey,
+      error: error.toString(),
+    });
+  }
 });

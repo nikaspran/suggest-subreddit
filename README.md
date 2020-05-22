@@ -8,5 +8,4 @@ This currently uses subreddit similarity data from [anvaka/sayit](https://github
 
 ## TODO
 
-* tweak data
 * add manual input field instead of via Reddit oauth

@@ -10,7 +10,7 @@ const filenames = fs.readdirSync(dataDir);
 
 const data = {};
 filenames.forEach((filename) => {
-  if (!filename.match(/\d+_[\w\d]+\.json/)) {
+  if (!(filename.match(/\d+_[\w\d]+\.json/) || filename === 'substitutes.json')) {
     return;
   }
 
